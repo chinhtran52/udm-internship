@@ -1,0 +1,10 @@
+6th Jan 2020
+	- Todos:
+		+ Started the internship
+		+ Downloaded Kinect SDK
+		+ Got an overview of Kinect
+		+ Was ready to install Visual Studio 2019 and Kinect
+	- Problems:
+		+ Confused between Windows and MacOS
+	- References:
+		+ https://homes.cs.washington.edu/~edzhang/tutorials/kinect2/kinect0.html
