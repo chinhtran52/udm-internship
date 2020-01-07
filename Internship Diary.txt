@@ -8,3 +8,12 @@
 		+ Confused between Windows and MacOS
 	- References:
 		+ https://homes.cs.washington.edu/~edzhang/tutorials/kinect2/kinect0.html
+
+7th Jan 2020
+	- Todos:
+		+ Get an overview of MakeHuman and Blender
+		+ Install Kinect SDK
+		+ Build sample of kinect
+		+ Instal Blender
+	- Probs:
+	- Refs:
