@@ -1,0 +1,7 @@
+﻿  main.cpp
+c:\users\chinh tran\documents\source\kinect\3dpoints\3dpoints\main.cpp(64): warning C4018: '<': signed/unsigned mismatch
+c:\users\chinh tran\documents\source\kinect\3dpoints\3dpoints\main.cpp(83): warning C4244: 'argument': conversion from 'const int' to 'GLfloat', possible loss of data
+c:\users\chinh tran\documents\source\kinect\3dpoints\3dpoints\main.cpp(85): warning C4244: 'argument': conversion from 'const int' to 'GLfloat', possible loss of data
+c:\users\chinh tran\documents\source\kinect\3dpoints\3dpoints\main.cpp(87): warning C4244: 'argument': conversion from 'const int' to 'GLfloat', possible loss of data
+  3dpoints.vcxproj -> C:\Users\Chinh Tran\Documents\source\kinect\3dpoints\Debug\3dpoints.exe
+  3dpoints.vcxproj -> C:\Users\Chinh Tran\Documents\source\kinect\3dpoints\Debug\3dpoints.pdb (Partial PDB)
