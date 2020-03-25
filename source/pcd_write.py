@@ -28,8 +28,7 @@ def outlierRemoval(open3d_point_cloud):
     #prepare input data
     ## downsample the point clouds with voxel = 0.02
     ## voxel_down_pcd = open3d_point_cloud.voxel_down_sample(voxel_size=0.02)
-    cl, ind = open3d_point_cloud.remove_statistical_outlier(nb_neighbors=20,
-                                                        std_ratio=2.0)
+    cl, ind = open3d_point_cloud.remove_statistical_outlier(nb_neighbors=60,std_ratio=1.0)
     return display_inlier_outlier(open3d_point_cloud, ind)
 
 def display_inlier_outlier(cloud, ind):
