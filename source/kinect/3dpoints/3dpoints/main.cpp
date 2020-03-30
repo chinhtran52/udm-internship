@@ -23,7 +23,7 @@ IKinectSensor* sensor;         // Kinect sensor
 IDepthFrameReader* reader;     // Kinect depth data source
 ICoordinateMapper* mapper;
 
-std::string path = "C:/Users/Chinh Tran/Documents/source/points/pose1.dat";
+std::string path = "C:/Users/Chinh Tran/udm-internship/source/raw points/pose_8.dat";
 
 bool initKinect() {
 	if (FAILED(GetDefaultKinectSensor(&sensor))) {
@@ -57,7 +57,7 @@ void getKinectData(GLubyte* dest) {
 		const unsigned short* dataEnd = curr + (width*height);	//tong so pixels
 
 		//ghi file
-		/*
+		
 		std::ofstream fileOutput(path);
 		if (!fileOutput.fail())
 		{
@@ -66,7 +66,7 @@ void getKinectData(GLubyte* dest) {
 				fileOutput  << depth2xyz[i].X << "  " << depth2xyz[i].Y << "  " << depth2xyz[i].Z << std::endl;
 			}
 			fileOutput.close();
-		}*/
+		}
 		//duyet toan frame
 		while (curr < dataEnd) {
 			// Get depth in millimeters
