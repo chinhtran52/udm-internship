@@ -15,8 +15,8 @@ def groupYAxis(front_points,delta,radius):
         group[num].append(list(temp[i]))
     for i in range(group_count):
         group[i] = sortColumn(group[i],0)
-        getArea(group[i],radius)
-    return group
+        group[i] = getArea(group[i],radius)
+    return np.asarray(group)
 
 def sortColumn(list_or_array,col_num):
     a = np.asarray(list_or_array)
@@ -39,23 +39,31 @@ def getArea(list_or_array,radius):
             if count != (i+1):
                 if not ptd.checkNeighbor(list_or_array[i],list_or_array[i+1],radius):
                     rule = True
-    print('The array are divided into '+str(len(result))+' area(s)')
+    #print('The array are divided into '+str(len(result))+' area(s)')
     return np.asarray(result)
 
-def reverseCurve(points):
+def reverseCurve(points,shift=0):
     temp = points.copy()
     center_x = (temp[0][0]+temp[-1][0])/2
     center_z = (temp[0][2]+temp[-1][2])/2
-    print(center_x,center_z)
     for i in temp:
         i[0] = 2*center_x - i[0]
-        i[2] = 2*center_z - i[2]
+        i[2] = 2*center_z - i[2] + shift
     return np.asarray(temp)
 
-test = [[-2,1,3],
-        [-1,0,1],
-        [1,6,1],
-        [2,5,2]]
+def reshape(array_points):
+    result = []
+    for row in array_points:
+        for col in row:
+            result.append(col)
+    return np.asarray(result)
 
-print(reverseCurve(test))
-
+def generateBack(front_points,delta,radius,shift=0):
+    group_points = groupYAxis(front_points,delta,radius)
+    results = []
+    for i in group_points:
+        for j in i:
+            temp = np.asarray(j)
+            results.append(reverseCurve(temp,shift))
+    results = reshape(results)
+    return np.asarray(results)
