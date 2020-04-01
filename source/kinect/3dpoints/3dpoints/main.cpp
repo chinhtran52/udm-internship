@@ -23,7 +23,7 @@ IKinectSensor* sensor;         // Kinect sensor
 IDepthFrameReader* reader;     // Kinect depth data source
 ICoordinateMapper* mapper;
 
-std::string path = "C:/Users/Chinh Tran/udm-internship/source/raw points/pose_8.dat";
+std::string path = "C:/Users/Chinh Tran/udm-internship/source/raw points/pose_5.dat";
 
 bool initKinect() {
 	if (FAILED(GetDefaultKinectSensor(&sensor))) {
