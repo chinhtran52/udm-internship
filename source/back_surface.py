@@ -1,10 +1,10 @@
 import numpy as np
 import math
-import points_distance as ptd
+import utilities as uti
 
 def groupYAxis(front_points,delta,radius):
     #sap xep theo chieu tang dan cua toa do y
-    temp = sortColumn(front_points,1)
+    temp = uti.sortColumn(front_points,1)
     #tao mang gop nhom
     group_count = math.ceil((temp[-1][1]-temp[0][1])/delta)
     group = []
@@ -14,14 +14,9 @@ def groupYAxis(front_points,delta,radius):
         num = int((temp[i][1]-temp[0][1])//delta)
         group[num].append(list(temp[i]))
     for i in range(group_count):
-        group[i] = sortColumn(group[i],0)
+        group[i] = uti.sortColumn(group[i],0)
         group[i] = getArea(group[i],radius)
     return np.asarray(group)
-
-def sortColumn(list_or_array,col_num):
-    a = np.asarray(list_or_array)
-    #sap xep theo chieu tang dan cua toa do y
-    return a[a[:,col_num].argsort()]
 
 def getArea(list_or_array,radius):
     result = []
@@ -31,12 +26,12 @@ def getArea(list_or_array,radius):
         if rule:
             result.append([list_or_array[i]])
             if count != (i+1):
-                if ptd.checkNeighbor(list_or_array[i],list_or_array[i+1],radius):
+                if uti.checkNeighbor(list_or_array[i],list_or_array[i+1],radius):
                     rule = False
         else:
             result[-1].append(list_or_array[i])
             if count != (i+1):
-                if not ptd.checkNeighbor(list_or_array[i],list_or_array[i+1],radius):
+                if not uti.checkNeighbor(list_or_array[i],list_or_array[i+1],radius):
                     rule = True
     #print('The array are divided into '+str(len(result))+' area(s)')
     return np.asarray(result)

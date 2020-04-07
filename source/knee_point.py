@@ -58,6 +58,3 @@ def getNeighborPoints(center_point,radius,curve_type=None,pose_number=None):
         if (ymin<plydata['vertex'][i]['y']<ymax) and (xmin<plydata['vertex'][i]['x']<xmax) and (zmin<plydata['vertex'][i]['z']<zmax):
             temp.append([i,plydata['vertex'][i]['quality']])
     return temp
-
-def average_curvature(list):
-    return 0
