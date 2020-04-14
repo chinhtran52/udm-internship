@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "C:\\Users\\chinh\\.conda\\envs\\montl\\python.exe",
+    "python.pythonPath": "/opt/miniconda3/envs/montl/bin/python",
     "python.linting.pylintEnabled": true,
     "python.linting.enabled": true
 }
