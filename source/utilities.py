@@ -2,6 +2,7 @@ import numpy as np
 import open3d as o3d
 import copy
 import math
+from plyfile import PlyData, PlyElement
 
 def createPointCloud(points_list):
     temp = o3d.geometry.PointCloud()
@@ -48,3 +49,22 @@ def checkNeighbor(numy_array_1,numy_array_2,radius):
         return True
     else:
         return False
+
+def filterBack(directory=None):
+    if directory:
+        plydata = PlyData.read(directory)
+        count = plydata['vertex'].count
+        temp = np.zeros((count,5))
+        temp[:,0] = plydata['vertex']['x']
+        temp[:,1] = plydata['vertex']['y']
+        temp[:,2] = plydata['vertex']['z']
+        temp[:,3] = plydata['vertex']['nz']
+        temp[:,4] = plydata['vertex']['quality']
+        results = []
+        for i in temp:
+            if i[3] > 0:
+                results.append([i[0],i[1],i[4]])
+        results = np.asarray(results)
+        return results[:,0:2],results[:,2]
+    else:
+        print('Cant find your files directory.')
