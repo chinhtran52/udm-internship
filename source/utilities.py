@@ -3,6 +3,8 @@ import open3d as o3d
 import copy
 import math
 from plyfile import PlyData, PlyElement
+from PIL import Image
+from colour import Color
 
 def createPointCloud(points_list):
     temp = o3d.geometry.PointCloud()
@@ -68,3 +70,14 @@ def filterBack(directory=None):
         return results[:,0:2],results[:,2]
     else:
         print('Cant find your files directory.')
+
+def displayImage(points,height,width,background=np.array([255,255,255])):
+    #init background
+    frame = np.empty((height,width,3),dtype=np.int8)
+    frame[:,:] = background
+    #paint format x,y,r,g,b
+    for i in points:
+        frame[int(i[1])][int(i[0])] = i[2:5]
+    #display
+    img = Image.fromarray(frame,'RGB')
+    img.show()
