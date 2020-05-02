@@ -12,3 +12,6 @@ class Position:
             self.y = y
         if isinstance(x,int):
             self.z = z
+    
+    def getCoordinate(self):
+        return np.array([self.x,self.y,self.z])
