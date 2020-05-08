@@ -81,3 +81,12 @@ def displayImage(points,height,width,background=np.array([255,255,255])):
     #display
     img = Image.fromarray(frame,'RGB')
     img.show()
+
+def multipleArray(cycle,values):
+    if cycle <= 1:
+        return values
+    else:
+        result = values.copy()
+        for i in range(cycle -1):
+            result = np.append(result,values)
+        return result

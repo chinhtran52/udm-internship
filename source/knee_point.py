@@ -43,9 +43,9 @@ def getCurveKnee(point,frames,folder):
     return result
 
 def getNeighborPoints(center_point,radius,curve_type=None,pose_number=None):
-    cur = curve_type or 'gauss'
+    cur = curve_type or 'ng'
     pose = pose_number or '1'
-    plydata = PlyData.read('./Mesh/results/normal/'+cur+'_pose_'+pose+'.ply')
+    plydata = PlyData.read('./Mesh/results/8 frames/'+cur+pose+'.ply')
     vertices = plydata['vertex'].count
     ymax = plydata['vertex'][center_point]['y']+radius
     ymin = plydata['vertex'][center_point]['y']-radius
