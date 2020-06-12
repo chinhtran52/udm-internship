@@ -15,3 +15,11 @@ class Position:
     
     def getCoordinate(self):
         return np.array([self.x,self.y,self.z])
+    
+    def setCoordinate(self,coords):
+        try:
+            self.x = coords[0]
+            self.y = coords[1]
+            self.z = coords[2]
+        except:
+            print("Can't set joint position!")

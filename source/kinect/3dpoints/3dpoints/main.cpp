@@ -4,7 +4,7 @@
 #include <Windows.h>
 #include <Ole2.h>
 
-#include <Kinect.h>
+#include <kinect.h>
 
 #include <iostream>
 
@@ -22,6 +22,7 @@ CameraSpacePoint depth2xyz[width*height];
 IKinectSensor* sensor;         // Kinect sensor
 IDepthFrameReader* reader;     // Kinect depth data source
 ICoordinateMapper* mapper;
+Vector4 skeletonPosition[20];
 
 std::string path = "C:/Users/Chinh Tran/udm-internship/source/Points/raw points/pose_3.dat";
 

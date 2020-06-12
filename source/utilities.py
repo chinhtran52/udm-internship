@@ -42,7 +42,13 @@ def sortColumn(list_or_array,col_num):
     #sap xep theo chieu tang dan cua toa do y
     return a[a[:,col_num].argsort()]
 
-def distance(x1,y1,z1,x2,y2,z2):
+def distance(numpy_point_1,numpy_point_2):
+    x1 = numpy_point_1[0]
+    y1 = numpy_point_1[1]
+    z1 = numpy_point_1[2]
+    x2 = numpy_point_2[0]
+    y2 = numpy_point_2[1]
+    z2 = numpy_point_2[2]
     return math.sqrt((x2-x1)**2+(y2-y1)**2+(z2-z1)**2)
 
 def checkNeighbor(numy_array_1,numy_array_2,radius):
@@ -90,3 +96,19 @@ def multipleArray(cycle,values):
         for i in range(cycle -1):
             result = np.append(result,values)
         return result
+
+def outlierRemoval(open3d_point_cloud,neighbors,ratio):
+    #prepare input data
+    ## downsample the point clouds with voxel = 0.02
+    ## voxel_down_pcd = open3d_point_cloud.voxel_down_sample(voxel_size=0.02)
+    cl, ind = open3d_point_cloud.remove_statistical_outlier(nb_neighbors=neighbors,std_ratio=ratio)
+    return display_inlier_outlier(open3d_point_cloud, ind)
+
+def display_inlier_outlier(cloud, ind):
+    inlier_cloud = cloud.select_down_sample(ind)
+    outlier_cloud = cloud.select_down_sample(ind, invert=True)
+
+    return {
+        'inlier' : inlier_cloud,
+        'outlier' : outlier_cloud
+    }

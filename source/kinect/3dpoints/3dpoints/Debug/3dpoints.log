@@ -1,2 +1,2 @@
 ﻿  main.cpp
-  3dpoints.vcxproj -> C:\Users\chinh\udm-internship\source\kinect\3dpoints\Debug\3dpoints.exe
+C:\Users\chinh\udm-internship\source\kinect\3dpoints\3dpoints\main.cpp(10,10): fatal error C1083: Cannot open include file: 'NuiApi.h': No such file or directory

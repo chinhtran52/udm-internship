@@ -1,12 +1,12 @@
 import numpy as np
 import plyfile as ply
 from plyfile import PlyData, PlyElement
+import utilities as uti
 
 def getKneePoints(frames):
     results = []
     for i in range(1,frames+1):
-        file_name='pose_'+str(i)+'.ply'
-        plydata = PlyData.read('./Mesh/Gauss Curvature/normal/'+file_name)
+        plydata = PlyData.read('./Mesh/results/8 frames/ng'+str(i)+'.ply')
         vertices = plydata['vertex'].count
         height = np.amax(plydata['vertex']['y'])-np.amin(plydata['vertex']['y'])
         curvature_data = np.asarray(plydata['vertex']['quality'])
@@ -42,19 +42,40 @@ def getCurveKnee(point,frames,folder):
         result.append(temp)
     return result
 
-def getNeighborPoints(center_point,radius,curve_type=None,pose_number=None):
+def getNeighborPoints(center_point,radius,curve_type,pose_number):
+    vertices_data = PlyData.read('./Mesh/results/8 frames/'+curve_type+pose_number+'.ply')['vertex']
+    count = vertices_data.count
+    vertices = np.empty((count,5))
+    vertices[:,0] = vertices_data['x']
+    vertices[:,1] = vertices_data['y']
+    vertices[:,2] = vertices_data['z']
+    vertices[:,3] = vertices_data['quality']
+    vertices[:,4] = vertices_data['nz']
+    try:
+        ctr = vertices[center_point]
+    except:
+        print("center point's outside the data")
+        return False
+    temp = []
+    index = []
+    for i in range(count):
+        if uti.distance(vertices[i][:3],ctr) <= radius and vertices[i][4] > 0:
+            temp.append(vertices[i])
+            index.append(i)
+    return np.asarray(temp),index
+
+def getListPoints(list_index,curve_type=None,pose_number=None):
     cur = curve_type or 'ng'
     pose = pose_number or '1'
-    plydata = PlyData.read('./Mesh/results/8 frames/'+cur+pose+'.ply')
-    vertices = plydata['vertex'].count
-    ymax = plydata['vertex'][center_point]['y']+radius
-    ymin = plydata['vertex'][center_point]['y']-radius
-    xmax = plydata['vertex'][center_point]['x']+radius
-    xmin = plydata['vertex'][center_point]['x']-radius
-    zmax = plydata['vertex'][center_point]['z']+radius
-    zmin = plydata['vertex'][center_point]['z']-radius
+    vertices_data = PlyData.read('./Mesh/results/8 frames/'+cur+pose+'.ply')['vertex']
+    count = vertices_data.count
+    vertices = np.empty((count,5))
+    vertices[:,0] = vertices_data['x']
+    vertices[:,1] = vertices_data['y']
+    vertices[:,2] = vertices_data['z']
+    vertices[:,3] = vertices_data['quality']
+    vertices[:,4] = vertices_data['nz']
     temp = []
-    for i in range(vertices):
-        if (ymin<plydata['vertex'][i]['y']<ymax) and (xmin<plydata['vertex'][i]['x']<xmax) and (zmin<plydata['vertex'][i]['z']<zmax):
-            temp.append([i,plydata['vertex'][i]['quality']])
-    return temp
+    for i in list_index:
+        temp.append(vertices[i])
+    return np.asarray(temp)

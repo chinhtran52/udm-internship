@@ -23,19 +23,3 @@ def filterBodyPoints(data):
         if 2.8>i[2]>1.7 and -1<i[1]<1 and -0.5<i[0]<0.5:
             results.append(i)
     return results
-
-def outlierRemoval(open3d_point_cloud,neighbors,ratio):
-    #prepare input data
-    ## downsample the point clouds with voxel = 0.02
-    ## voxel_down_pcd = open3d_point_cloud.voxel_down_sample(voxel_size=0.02)
-    cl, ind = open3d_point_cloud.remove_statistical_outlier(nb_neighbors=neighbors,std_ratio=ratio)
-    return display_inlier_outlier(open3d_point_cloud, ind)
-
-def display_inlier_outlier(cloud, ind):
-    inlier_cloud = cloud.select_down_sample(ind)
-    outlier_cloud = cloud.select_down_sample(ind, invert=True)
-
-    return {
-        'inlier' : inlier_cloud,
-        'outlier' : outlier_cloud
-    }
